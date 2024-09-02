@@ -2111,8 +2111,6 @@ public:
 
   loco::NodeShape visit(const luci::CircleLogicalOr *node) final { return use_x(node); }
 
-  loco::NodeShape visit(const luci::CircleLogistic *node) final { return use_x(node); }
-
   loco::NodeShape visit(const luci::CircleLogSoftmax *node) final { return use_logits(node); }
 
   loco::NodeShape visit(const luci::CircleMatrixDiag *node) final

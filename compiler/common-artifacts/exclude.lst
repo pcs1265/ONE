@@ -7,8 +7,10 @@
 ## TensorFlowLiteRecipes
 optimize(Add_STR_000) # STRING is not supported
 optimize(Add_STR_001) # STRING is not supported
+optimize(Reshape_003) # no input, no option is not supported
 
 ## CircleRecipes
+optimize(RoPE_000)
 
 #[[ tcgenerate : Exclude from test data generation(TestDataGenerator) ]]
 ## TensorFlowLiteRecipes
@@ -49,6 +51,7 @@ tcgenerate(FullyConnected_I4_002)
 tcgenerate(FullyConnected_U8_000)
 tcgenerate(GatherNd_000)
 tcgenerate(GatherNd_001)
+tcgenerate(Inf_Mul_000) # TestDataGenerator does not support unknown dimension
 tcgenerate(L2Pool2D_U8_000)
 tcgenerate(Log_000)
 tcgenerate(MatMul_000)
@@ -123,6 +126,7 @@ tcgenerate(ReLU6_dynamic_000) # TestDataGenerator does not support unknown dimen
 tcgenerate(ReLUN1To1_000)
 tcgenerate(ReLUN1To1_dynamic_000) # TestDataGenerator does not support unknown dimension
 tcgenerate(Reshape_003) # luci-interpreter doesn't support reshape without built-in option
+tcgenerate(Reshape_004) # has 0 in shape
 tcgenerate(ReverseSequence_000)
 tcgenerate(ReverseV2_000)
 tcgenerate(Round_000)
@@ -178,3 +182,4 @@ tcgenerate(CircleFullyConnected_U4_002)
 tcgenerate(GRU_000) # luci-interpreter does not support custom GRU
 tcgenerate(InstanceNorm_000)
 tcgenerate(InstanceNorm_001)
+tcgenerate(RoPE_000)

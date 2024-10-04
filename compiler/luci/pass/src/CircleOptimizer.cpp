@@ -56,6 +56,8 @@
 #include "luci/Pass/FuseSliceWithTConvPass.h"
 #include "luci/Pass/FuseHorizontalFullyConnectedPass.h"
 #include "luci/Pass/FuseTransposeWithMeanPass.h"
+#include "luci/Pass/FuseRmsNormPass.h"
+#include "luci/Pass/FuseRoPEPass.h"
 #include "luci/Pass/MakeBatchNormGammaPositivePass.h"
 #include "luci/Pass/RemoveDuplicateConstPass.h"
 #include "luci/Pass/RemoveFakeQuantPass.h"
@@ -66,6 +68,7 @@
 #include "luci/Pass/RemoveRedundantTransposePass.h"
 #include "luci/Pass/RemoveRedundantQuantizePass.h"
 #include "luci/Pass/RemoveUnnecessaryAddPass.h"
+#include "luci/Pass/RemoveUnnecessaryCastPass.h"
 #include "luci/Pass/RemoveUnnecessaryReshapePass.h"
 #include "luci/Pass/RemoveUnnecessaryReshapeNetPass.h"
 #include "luci/Pass/RemoveUnnecessarySlicePass.h"
@@ -343,6 +346,8 @@ void CircleOptimizer::optimize(loco::Graph *g) const
   option_to_pass[Options::Algorithm::FuseRsqrt] = &createPassInstance<luci::FuseRsqrtPass>;
   option_to_pass[Options::Algorithm::FuseHorizontalFullyConnected] = &createPassInstance<luci::FuseHorizontalFullyConnectedPass>;
   option_to_pass[Options::Algorithm::FuseTransposeWithMean] = &createPassInstance<luci::FuseTransposeWithMeanPass>;
+  option_to_pass[Options::Algorithm::FuseRmsNorm] = &createPassInstance<luci::FuseRmsNormPass>;
+  option_to_pass[Options::Algorithm::FuseRoPE] = &createPassInstance<luci::FuseRoPEPass>;
   option_to_pass[Options::Algorithm::FoldAddV2] = &createPassInstance<luci::FoldAddV2Pass>;
   option_to_pass[Options::Algorithm::FoldCast] = &createPassInstance<luci::FoldCastPass>;
   option_to_pass[Options::Algorithm::FoldDensify] = &createPassInstance<luci::FoldDensifyPass>;
@@ -365,6 +370,7 @@ void CircleOptimizer::optimize(loco::Graph *g) const
   option_to_pass[Options::Algorithm::RemoveQDQForMixedPrecisionOp] = &createPassInstance<luci::RemoveQDQForMixedPrecisionOpPass>;
   option_to_pass[Options::Algorithm::RemoveQuantDequantSeq] = &createPassInstance<luci::RemoveQuantDequantSeqPass>;
   option_to_pass[Options::Algorithm::RemoveUnnecessaryAdd] = &createPassInstance<luci::RemoveUnnecessaryAddPass>;
+  option_to_pass[Options::Algorithm::RemoveUnnecessaryCast] = &createPassInstance<luci::RemoveUnnecessaryCastPass>;
   option_to_pass[Options::Algorithm::RemoveUnnecessarySlice] = &createPassInstance<luci::RemoveUnnecessarySlicePass>;
   option_to_pass[Options::Algorithm::RemoveUnnecessaryStridedSlice] = &createPassInstance<luci::RemoveUnnecessaryStridedSlicePass>;
   option_to_pass[Options::Algorithm::RemoveUnnecessarySplit] = &createPassInstance<luci::RemoveUnnecessarySplitPass>;

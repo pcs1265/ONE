@@ -74,6 +74,8 @@ Add(Net_Mul_FullyConnected_001 PASS fuse_mul_to_fullyconnected_weights fold_mul)
 Add(Net_Mul_FullyConnected_002 PASS fuse_mul_to_fullyconnected_weights fold_mul)
 Add(Net_Preactivation_BN_000 PASS fuse_preactivation_batchnorm)
 Add(Net_Reshape_Reshape_000 PASS remove_redundant_reshape)
+Add(Net_RmsNorm_000 PASS fuse_rmsnorm)
+Add(Net_RoPE_000 PASS fuse_rope)
 Add(Net_Shape_Add_000 PASS fold_shape)
 Add(Net_Sqrt_Div_000 PASS transform_sqrt_div_to_rsqrt_mul)
 Add(Net_Squeeze_Squeeze_000 PASS substitute_squeeze_to_reshape)
@@ -91,6 +93,7 @@ Add(Net_TConv_Slice_001 PASS fuse_slice_with_tconv)
 Add(Net_TConv_Slice_002 PASS fuse_slice_with_tconv)
 Add(Net_TConv_Slice_003 PASS fuse_slice_with_tconv)
 Add(Net_Trans_Reshape_Trans_000 PASS remove_unnecessary_transpose)
+Add(Net_Unnecessary_Cast_000 PASS remove_unnecessary_cast)
 Add(PadV2_001 PASS substitute_padv2_to_pad)
 Add(Softmax_001 PASS decompose_softmax)
 Add(Softmax_002 PASS decompose_softmax)
@@ -140,3 +143,8 @@ Add(REGRESS_ONNX_Conv_BN_Relu6_001 PASS
 
 Add(REGRESS_ONNX_Mul_Mul_000 PASS
       convert_nchw_to_nhwc)
+
+Add(REGRESS_Issue_13863 PASS substitute_pack_to_reshape)
+
+# SHAPE INFERENCE test
+Add(Inf_Pad_000 PASS)

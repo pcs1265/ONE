@@ -120,6 +120,8 @@ int entry(int argc, char **argv)
              "This will fuse Mul operation with a Div operation whose numerator is const.");
   add_switch(arser, "--fuse_mul_with_fullyconnected",
              "This will fuse Mul operator with a preceding FullyConnected operator.");
+  add_switch(arser, "--fuse_rmsnorm", "This will fuse operators to RmsNorm operator");
+  add_switch(arser, "--fuse_rope", "This will fuse operators to rope operator");
   add_switch(arser, "--fuse_slice_with_tconv",
              "This will fuse Slice operation with a preceding TConv if possible.");
   add_switch(arser, "--fuse_transpose_with_mean",
@@ -148,6 +150,8 @@ int entry(int argc, char **argv)
              "This will fuse or remove subsequent Transpose operators");
   add_switch(arser, "--remove_unnecessary_add",
              "This will remove unnecessary add of zero constant");
+  add_switch(arser, "--remove_unnecessary_cast",
+             "This will remove unnecessary cast with the same input and output type.");
   add_switch(arser, "--remove_unnecessary_reshape",
              "This will remove unnecessary reshape operators");
   add_switch(arser, "--remove_unnecessary_slice", "This will remove unnecessary slice operators");
@@ -299,6 +303,8 @@ int entry(int argc, char **argv)
   option_str_to_enum["fuse_preactivation_batchnorm"] = Algorithms::FusePreActivationBatchNorm;
   option_str_to_enum["fuse_prelu"] = Algorithms::FusePRelu;
   option_str_to_enum["fuse_gelu"] = Algorithms::FuseGelu;
+  option_str_to_enum["fuse_rmsnorm"] = Algorithms::FuseRmsNorm;
+  option_str_to_enum["fuse_rope"] = Algorithms::FuseRoPE;
   option_str_to_enum["fuse_rsqrt"] = Algorithms::FuseRsqrt;
   option_str_to_enum["fuse_transpose_with_mean"] = Algorithms::FuseTransposeWithMean;
   option_str_to_enum["remove_duplicate_const"] = Algorithms::RemoveDuplicateConst;
@@ -310,6 +316,7 @@ int entry(int argc, char **argv)
   option_str_to_enum["remove_redundant_reshape"] = Algorithms::RemoveRedundantReshape;
   option_str_to_enum["remove_redundant_transpose"] = Algorithms::RemoveRedundantTranspose;
   option_str_to_enum["remove_unnecessary_add"] = Algorithms::RemoveUnnecessaryAdd;
+  option_str_to_enum["remove_unnecessary_cast"] = Algorithms::RemoveUnnecessaryCast;
   option_str_to_enum["remove_unnecessary_reshape"] = Algorithms::RemoveUnnecessaryReshape;
   option_str_to_enum["remove_unnecessary_slice"] = Algorithms::RemoveUnnecessarySlice;
   option_str_to_enum["remove_unnecessary_strided_slice"] = Algorithms::RemoveUnnecessaryStridedSlice;

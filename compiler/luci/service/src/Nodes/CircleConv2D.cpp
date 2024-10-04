@@ -59,7 +59,9 @@ loco::TensorShape Algorithm::visit(const luci::CircleConv2D *node)
 
   assert(ifm_shape.rank() == 4);
   assert(ker_shape.rank() == 4);
-  assert(ifm_shape.dim(3) == ker_shape.dim(3));
+  // Now we don't need to check ifm_shape.dim(3) == ker_shape.dim(3)
+  // because we need to support dynamic shape
+  // assert(ifm_shape.dim(3) == ker_shape.dim(3));
 
   loco::TensorShape ofm_shape = conv2d_output_shape(node);
   // Height and width have already been determined by conv2d_output_shape
